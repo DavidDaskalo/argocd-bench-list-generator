@@ -27,7 +27,7 @@ spec:
                 value: '{{ "{{ metadata.name }}" }}'
         - repoURL: https://github.com/DavidDaskalo/argocd-bench-list-generator.git
           targetRevision: master
-          path: appset2/
+          path: appset-2/
           helm:
             valueFiles:
             - 'values.yaml'
@@ -36,7 +36,7 @@ spec:
                 value: '{{ "{{ metadata.name }}" }}'
         - repoURL: https://github.com/DavidDaskalo/argocd-bench-list-generator.git
           targetRevision: master
-          path: appset4/
+          path: appset-4/
           helm:
             valueFiles:
             - 'values.yaml'
