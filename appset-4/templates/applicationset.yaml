@@ -5,15 +5,20 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      {{- range $serviceName, $service := .Values.services }}
-       - values:
-           serviceName: {{ $serviceName }}
-           repoURL: {{ $service.repoURL }}
-           targetRevision: {{ $service.targetRevision }}
-           path: {{ $service.path }}
-      {{- end}}
+  - matrix:
+      - clusters:
+          selector:
+            matchLabels:
+              test: hotfix
+      - list:
+          elements:
+          {{- range $serviceName, $service := .Values.services }}
+           - values:
+               serviceName: {{ $serviceName }}
+               repoURL: {{ $service.repoURL }}
+               targetRevision: {{ $service.targetRevision }}
+               path: {{ $service.path }}
+          {{- end}}
   template:
     metadata:
       name: '{{"{{ values.serviceName }}"}}-{{ .Values.global.clusterName }}'
