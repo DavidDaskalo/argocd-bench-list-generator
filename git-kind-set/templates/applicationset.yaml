@@ -9,24 +9,40 @@ spec:
       repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
       revision: master
       files:
-        {{- range $kindName := .Values.kinds}}
-        - path: 'kinds/{{ $kindName }}_cr.yaml'
-        {{- end}}
+        - path: 'kinds/*_cr.yaml'
   template:
     metadata:
       name: '{{ .Values.projectName }}-{{ "{{ metadata.name }}" }}'
     spec:
       project: default
       source:
-        repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
-        targetRevision: master
-        path: appset/
-        helm:
-          valueFiles:
-          - 'values.yaml'
-          parameters:
-            - name: global.clusterName
-              value: '{{ "{{ metadata.name }}" }}'
+        - repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+          targetRevision: master
+          path: appset/
+          helm:
+            valueFiles:
+            - 'values.yaml'
+            parameters:
+              - name: global.clusterName
+                value: '{{ "{{ metadata.name }}" }}'
+        - repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+          targetRevision: master
+          path: appset2/
+          helm:
+            valueFiles:
+            - 'values.yaml'
+            parameters:
+              - name: global.clusterName
+                value: '{{ "{{ metadata.name }}" }}'
+        - repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+          targetRevision: master
+          path: appset4/
+          helm:
+            valueFiles:
+            - 'values.yaml'
+            parameters:
+              - name: global.clusterName
+                value: '{{ "{{ metadata.name }}" }}'
       destination:
         name: 'in-cluster'
       syncPolicy:
