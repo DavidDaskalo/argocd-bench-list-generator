@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+      repoURL: https://github.com/DavidDaskalo/argocd-bench-list-generator.git
       revision: master
       files:
         - path: 'kinds/*_cr.yaml'
@@ -15,8 +15,8 @@ spec:
       name: '{{ .Values.projectName }}-{{ "{{ metadata.name }}" }}'
     spec:
       project: default
-      source:
-        - repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+      sources:
+        - repoURL: https://github.com/DavidDaskalo/argocd-bench-list-generator.git
           targetRevision: master
           path: appset/
           helm:
@@ -25,7 +25,7 @@ spec:
             parameters:
               - name: global.clusterName
                 value: '{{ "{{ metadata.name }}" }}'
-        - repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+        - repoURL: https://github.com/DavidDaskalo/argocd-bench-list-generator.git
           targetRevision: master
           path: appset2/
           helm:
@@ -34,7 +34,7 @@ spec:
             parameters:
               - name: global.clusterName
                 value: '{{ "{{ metadata.name }}" }}'
-        - repoURL: https://github.com/michaelkotelnikov/argocd-bench-list-generator.git
+        - repoURL: https://github.com/DavidDaskalo/argocd-bench-list-generator.git
           targetRevision: master
           path: appset4/
           helm:
